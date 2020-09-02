@@ -1,0 +1,13 @@
+.listItem {
+    color:#000;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.listItem:hover {
+    background-color: aquamarine;
+}
+
+.listItem .current {
+    background-color: chartreuse;
+}
