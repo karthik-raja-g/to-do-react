@@ -2,31 +2,14 @@ import React,{useReducer, useState} from 'react';
 import './App.css';
 import ListComponent from './components/ListComponent';
 import TasksComponent from './components/TasksComponent';
-import CurrentItem from './components/CurrentItem';
+import TaskDetail from './components/TaskDetail';
 
 export const TodoContext = React.createContext();
 const initialState = {
   owner:'karthik',
-  id:Math.floor(Math.random() * 100),
+  id:1,
   createdOn:'',
-  list:[
-    {
-      id:1,
-      task:'sss',
-      subtasks:[
-        {
-          id:Math.floor(Math.random() * 100),
-          title:'',
-          reminder:'',
-          dueDate:'',
-          notes:'',
-          isCompleted:false
-        }
-      ],
-      subTaskCount:0,
-      isCompleted:false
-    }
-  ],
+  list:[],
   currentItemId: 0,
   currentTaskId: 0,
   currentSubTaskId: 0
@@ -38,11 +21,12 @@ const reducer = (prevState,action) => {
       return{
         ...prevState,
         owner : 'lothbrok'}
+
       case 'ADD_ITEM':
         const item = {
           id:Math.floor(Math.random() * 100),
           task:action.task,
-          subtasks:[],
+          tasks:[],
           subTaskCount:0,
           isCompleted:false
         }
@@ -52,39 +36,60 @@ const reducer = (prevState,action) => {
           ...prevState,
           list: newList
         }
+
       case 'SELECT_ITEM':
         return {
           ...prevState,
           currentItemId:action.id
         }
-      case 'ADD_TASK': 
-      const task = {
-        id:Math.floor(Math.random() * 100),
-        title:action.task,
-        reminder:'',
-        isCompleted: false,
-        dueDate:'',
-        notes:''
-      }
-      const oldItem = prevState.list.find(task => task.id === action.id)
-      const oldTasks = prevState.list.filter(task => task.id !== action.id)
-      oldItem.subtasks = oldItem.subtasks.concat(task)
 
-      console.log(
-        oldTasks.concat(oldItem)
-      )
+      case 'ADD_TASK': 
+        const task = {
+          id:Math.floor(Math.random() * 100),
+          title:action.task,
+          reminder:'',
+          isCompleted: false,
+          dueDate:'',
+          notes:''
+        }
+        const oldItem = prevState.list.find(task => task.id === action.id)
+        const oldTasks = prevState.list.filter(task => task.id !== action.id)
+        oldItem.tasks = oldItem.tasks.concat(task)
         return{
           ...prevState,
           list:oldTasks.concat(oldItem)
         }
-        case 'TOGGLE_TASK':
-          const allSubtasks = prevState.list.find(item => item.id === action.itemId).subtasks
-          const prevItem = prevState.list.map(item => item.subtasks.find(subtask => subtask.id === action.taskId))
-          console.log(allSubtasks)
-          console.log(prevItem)
-          return prevState
-    default:
-      return prevState
+
+      case 'TOGGLE_TASK':{  
+        console.log(action.taskId)
+        const itemIndex = prevState.list.findIndex(item => item.id === action.itemId)
+        const taskIndex = prevState.list[itemIndex].tasks.findIndex(task => task.id === action.taskId)
+        console.log(prevState.list[itemIndex].tasks[taskIndex])
+        prevState.list[itemIndex].tasks[taskIndex].isCompleted = !prevState.list[itemIndex].tasks[taskIndex].isCompleted
+        console.log(prevState.list[itemIndex].tasks[taskIndex])
+        return {...prevState}
+      }
+
+      case 'SELECT_TASK':
+        const id = parseInt(action.taskId)
+        return {
+          ...prevState,
+          currentTaskId:id
+        }
+
+      case 'UPDATE_TASK':
+        const itemIndex = prevState.list.findIndex(item => item.id === action.itemId)
+        const taskIndex = prevState.list[itemIndex].tasks.findIndex(task => task.id === action.taskId)
+        const currentTask = {
+          ...prevState.list[itemIndex].tasks[taskIndex],
+          notes:action.notes,
+          dueDate:action.dueDate
+        }
+        prevState.list[itemIndex].tasks[taskIndex] = currentTask
+        return {...prevState}
+
+      default:
+        return prevState
   }
 }
 
@@ -104,6 +109,9 @@ function App() {
             </div>
             <div className="col-lg-5">
               <TasksComponent itemId={currentState.currentItemId}/>
+            </div>
+            <div className="col-lg-4">
+              <TaskDetail itemId={currentState.currentItemId} taskId={currentState.currentTaskId}/>
             </div>
           </TodoContext.Provider>
         </div>

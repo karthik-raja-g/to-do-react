@@ -12,10 +12,10 @@ function Task(props) {
     return (
         <div className="row" >
             <div className="col-lg-2">
-                <div className={isChecked()+' float-right'}></div>
+                <div className={isChecked()+' float-right'} id={props.id} onClick={props.clickHandler}></div>
             </div>
             <div className="col-lg-10 text-left">
-                <h4 className={props.isCompleted && styles.taskCompleted } id={props.id} onClick={props.clickHandler}>{props.title}</h4>
+                <h4 className={props.isCompleted && styles.taskCompleted } id={props.id} onClick={props.selectHandler}>{props.title}</h4>
             </div>
         </div>
     )
