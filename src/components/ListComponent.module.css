@@ -1,0 +1,11 @@
+.inputItem {
+    border-radius: 0px !important;
+    border-style: hidden !important;
+    border-bottom: 2px solid #F5F5F5 !important;
+}
+input[type=text]::placeholder {
+    color: teal !important;
+}
+.inputItem:focus {
+    border-color: transparent !important;
+}

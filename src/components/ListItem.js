@@ -1,20 +1,23 @@
-import React,{useContext} from 'react'
-import { TodoContext } from '../App'
+import React, { useState, useEffect } from 'react'
 import styles from './ListItem.module.css'
 function ListItem(props) {
-    const todoContext = useContext(TodoContext)
-
-    // const onSelectItem = (id) => {
-    //     todoContext.actionDispatcher({
-    //         action:'SELECT_ITEM',
-    //         id:id
-    //     })
-    // }
+    console.log(props)
+    const[count,setCount] = useState(0)
+    useEffect(() => {
+        setCount(props.taskCount)
+    },[props.taskCount])
     return (
-        <div className={`${styles.listItem} d-flex`}>
-            <img src='/assets/images/pic1.png' className="img-fluid" alt="owner"/>    
-            <p>{props.item.task}</p>
-            <p>{props.item.subTaskCount}</p>
+        <div className= {styles.listItem +" row py-2 my-3 w-100 m-0"} >
+            <div className="col-lg-2">
+                <img src='/assets/images/checklist.svg' className="img-fluid" alt="owner"/>    
+            </div>
+            <div className="col-lg-8 text-left pt-2" >
+                <p id={props.id} onClick={props.clickHandler}>{props.task}</p>      
+            </div>
+            <div className="col-lg-2 pt-2">
+                            {/* <p>{props.item.completedTasks ? props.item.completedTasks : 0} | {props.item.taskCount}</p> */}
+                <p>{count}</p>
+            </div>
         </div>
     )
 }

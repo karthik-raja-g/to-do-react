@@ -1,9 +1,14 @@
 import React from 'react'
+import styles from './OwnerInfo.module.css'
 function OwnerInfo(props) {
     return (
-        <div className="text-left p-3 d-flex">
-            <img src='/assets/images/pic1.png' className="img-fluid" alt="owner"/>    
-            <p>{props.name}</p>      
+        <div className={styles.info+" row p-3"}>
+            <div className="col-lg-2">
+                <img src='/assets/images/user.svg' className="img-fluid" alt="owner"/>    
+            </div>
+            <div className="col-lg-9 text-left">
+                <p >{props.name}</p>      
+            </div>
         </div>
     )
 }

@@ -2,6 +2,7 @@ import React,{useContext, useState} from 'react'
 import { TodoContext } from '../App'
 import OwnerInfo from './OwnerInfo'
 import ListItem from './ListItem'
+import styles from './ListComponent.module.css'
 
 function ListComponent() {
 
@@ -18,26 +19,30 @@ function ListComponent() {
         }
         return
     }
-     function onSelectItem(id){
+     const onSelectItem = e => {
+         console.log(e.target.id)
         todoContext.actionDispatcher({
             type:'SELECT_ITEM',
-            id:id
+            id:parseInt(e.target.id)
         })
         // console.log(id)
     }
     return (
-        <div style={{border:'1px solid black'}}>
+        <div>
             <OwnerInfo name={todoContext.state.owner}/>
-            <div>
+            {/* <div> */}
                 {/* {todoContext.state.list.map(item => <ListItem key={item.id} item={item} onClick={() => console.log(item.id)}/>)} */}
-                {/* {todoContext.state.list.map(item => <ListItem key={item.id} item={item} onClick={() => onSelectItem(item.id)}/>)} */}
-                {todoContext.state.list.map(item =>
+                {todoContext.state.list.map(item => <ListItem key={item.id} {...item} clickHandler={onSelectItem}/>)}
+                {/* {todoContext.state.list.map(item =>
                     <div key={item.id} onClick={() => onSelectItem(item.id)}>
                         <ListItem item={item} />
-                    </div>)}
-            </div>
+                    </div>)} */}
+            {/* </div> */}
             <div >
-                <input type="text" value={newItem} placeholder="New List" onChange={(e)=>setNewItem(e.target.value)} onKeyUp={addNewItem} />
+                <input type="text" className={"form-control "+styles.inputItem} value={newItem} 
+                        placeholder="New List" 
+                        onChange={(e)=>setNewItem(e.target.value)} 
+                        onKeyUp={addNewItem} />
             </div>
         </div>
     )

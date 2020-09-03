@@ -1,0 +1,32 @@
+.bgWhite {
+    background-color: #fff;
+}
+.textarea {
+    border: none;
+    resize: none;
+}
+.btnGroup {
+    display: flex;
+    justify-content: flex-end;
+}
+.submitBtn {
+    background-color: #2466F7;
+}
+.cancelBtn {
+    background-color: #EEEEEE;
+    color: black !important;
+}
+.button {
+    border: none;
+    padding: 3% 5%;
+    width:110px;
+    border-radius: 0px;
+    color:#fff;
+}
+.absPos {
+    position: absolute;
+    height: 35px;
+    background-color: #fff;
+    width: 100%;
+    bottom: 0px;
+}

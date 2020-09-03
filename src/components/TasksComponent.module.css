@@ -1,4 +1,26 @@
+.taskMainContent {
+    background-color:#fff;
+    min-height: 600px;
+}
 .banner {
-    background-image: url('/assets/images/bg.jpg');
-    color: white;
+    background-image: url('/assets/images/mountains.jpg');
+    background-size: cover;
+    height: 220px;
+    background-position-y: -124px;
+    background-repeat: no-repeat;
+    align-items: flex-end;
+    color: #fff;
+    justify-content: space-between;
+}
+
+.addTask {
+    border-top:  2px solid #F5F5F5 ;
+    border-bottom:  2px solid #F5F5F5 ;
+    /* background-color: tomato; */
+}
+.banner h2 {
+    text-transform: uppercase;
+}
+.banner img {
+    width: 45px;
 }

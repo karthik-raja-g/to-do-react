@@ -27,7 +27,32 @@
 .App-link {
   color: #61dafb;
 }
-
+.todo-header {
+  background-color: #3C69E5;
+  color: white;
+}
+.itemList {
+  border-right: 1px solid #F5F5F5;
+}
+.appHeight {
+  min-height: 700px;
+  height: 100vh;
+  border-style: hidden;
+  overflow-y: auto;
+  border-right: 1px solid #e6e6e6;
+}
+.taskDetails {
+  background-color: #F6F6F6;
+  transition: ease;
+}
+.inputItem {
+  border-radius: 0px !important;
+  border-style: hidden !important;
+  /* border-bottom: 2px solid #F5F5F5 !important; */
+}
+.relPos {
+  position: relative;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
