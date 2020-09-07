@@ -17,13 +17,13 @@ function ListComponent() {
             })
             setNewItem('')
         }
-        return
+        // return
     }
-     const onSelectItem = e => {
-         console.log(e.target.id)
+     const onSelectItem = (e,id) => {
+         console.log(id)
         todoContext.actionDispatcher({
             type:'SELECT_ITEM',
-            id:parseInt(e.target.id)
+            id:parseInt(id)
         })
         // console.log(id)
     }
@@ -32,7 +32,7 @@ function ListComponent() {
             <OwnerInfo name={todoContext.state.owner}/>
             {/* <div> */}
                 {/* {todoContext.state.list.map(item => <ListItem key={item.id} item={item} onClick={() => console.log(item.id)}/>)} */}
-                {todoContext.state.list.map(item => <ListItem key={item.id} {...item} clickHandler={onSelectItem}/>)}
+                {todoContext.state.list.map(item => <ListItem key={item.id} {...item} clickHandler={(e) => onSelectItem(e,item.id)}/>)}
                 {/* {todoContext.state.list.map(item =>
                     <div key={item.id} onClick={() => onSelectItem(item.id)}>
                         <ListItem item={item} />

@@ -17,7 +17,7 @@ function TasksComponent(props) {
         console.log('in effect')
         console.log(todoContext.state)
         setItem(todoContext.state.list.find(item => item.id === itemId))
-    },[itemId, todoContext.state])
+    },[itemId])
 
     const addNewTask = (e) => {
         if(e.keyCode === 13 && newTask !== '') {
